@@ -13,7 +13,7 @@ class Network(object):
         self.ip = input(f"Entrer une adresse IP (l'adresse IP de cette machine est par défaut :\n{socket.gethostbyname(socket.gethostname())}, pour la selectionner appuyez sur ENTRER).\n>")
         self.hosts = []
         self.nm = nmap.PortScanner()
-        self.cve = CVESearch()
+        #self.cve = CVESearch()
     
     def section_print(self, title):
         print("\n" + "=" * 50)
@@ -41,10 +41,10 @@ class Network(object):
         print(f"\nDébut du scan Nmap pour :\t{host}")
         scan_result = self.nm.scan(hosts = host, arguments = '-sV -p 20-450 --script="vuln and safe"')
         
-        with open(f"scan/{host}.csv", "w", encoding = "utf-8") as f:
+        #with open(f"scan/{host}.csv", "w", encoding = "utf-8") as f:
             f.write(self.nm.csv())
 
-        with open(f"scan/{host}.json", "w", encoding = "utf-8") as f:
+        #with open(f"scan/{host}.json", "w", encoding = "utf-8") as f:
             f.write(json.dumps(scan_result, indent = 4, sort_keys = True))
     
     def print_result(self, host):
