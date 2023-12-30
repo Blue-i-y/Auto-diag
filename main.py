@@ -3,11 +3,13 @@ from pycvesearch import CVESearch
 from datetime import datetime
 from threading import Thread
 from ftplib import FTP
+from docx import Document
+
 
 
 class Network(object):
     def __init__(self):
-        print(pyfiglet.figlet_format("PROJET TUT.PY"))
+        print(pyfiglet.figlet_format("Auto-Diag"))
         self.ip = input(f"Entrer une adresse IP (l'adresse IP de cette machine est par défaut :\n{socket.gethostbyname(socket.gethostname())}, pour la selectionner appuyez sur ENTRER).\n>")
         self.hosts = []
         self.nm = nmap.PortScanner()
@@ -62,15 +64,15 @@ class Network(object):
                 pass
         print("\nAnalyse Nmap finie pour {}.".format(host))
 
-    #def cve_finder(self):
-     #   try:
-      #      cve_entry = str(input("\nSaisissez un code CVE pour votre recherche:\n>"))
-       #     cve_result = self.cve.id(cve_entry)
+    def cve_finder(self):
+        try:
+            cve_entry = str(input("\nSaisissez un code CVE pour votre recherche:\n>"))
+            cve_result = self.cve.id(cve_entry)
 
-        #    with open(f"cve/{cve_entry}.json", "w", encoding = "utf-8") as f:
-         #       f.write(json.dumps(cve_result, indent = 4, sort_keys = True))
-        #except:
-         #   pass
+            with open(f"cve/{cve_entry}.json", "w", encoding = "utf-8") as f:
+                f.write(json.dumps(cve_result, indent = 4, sort_keys = True))
+        except:
+            pass
     
     def ssh_connect(ip, username, password, port = 22):
         try:
@@ -111,20 +113,21 @@ class Network(object):
             print("\nHôte\t{}\nPort ftp (21) ouvert.\nLancement d'un bruteforce sur cet hôte.".format(host))
             self.bruteforce(host, "ftp")
 
-    def projet_tut(self):
+    def Auto_Diag(self):
         self.network_scanner()
         for i in range(len(self.hosts)):
             self.nmap_scan(self.hosts[i])
             self.print_result(self.hosts[i])
             self.service_detection(self.hosts[i])
+            self.save_results_to_word(self.hosts[i]) 
             time.sleep(1)
-            self.cve_finder()
+            #self.cve_finder()
 
 
 if __name__ == "__main__":
     try:
         Nscan = Network()
-        Nscan.projet_tut()
+        Nscan.Auto_Diag()
     except KeyboardInterrupt:  
         print("\n[x] Fermeture du programme !")
         sys.exit()
