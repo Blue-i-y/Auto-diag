@@ -14,13 +14,38 @@ class Network:
         print("=" * 50 + "\n")
 
     def network_scanner(self):
-        # ... (your existing code)
+        if len(self.ip) == 0:
+            network = f"{socket.gethostbyname(socket.gethostname())}/24"
+        else:
+            network = self.ip + '/24'
+        
+        print("\nScan réseau en cours ...")
+        self.nm.scan(hosts = network, arguments = "-Pn")
+        hosts_list = [(x, self.nm[x]['status']['state']) for x in self.nm.all_hosts()]
 
-    def nmap_scan(self, host):
-        # ... (your existing code)
+        print("=" * 50)
+        for host, status in hosts_list:
+            print("Hôte\t{}\t{}".format(host, status))
+            self.hosts.append(host)
+        print("=" * 50)
+        # print(hosts_list)
 
     def print_result(self, host):
-        # ... (your existing code)
+        print("Hostname : {}".format(self.nm[host].hostname()))
+        print("PORT\tSTATE\tSERVICE")
+        for i in range(20, 450):
+            try:
+                if self.nm[host]["tcp"][i]:
+                    print("{}/tcp\t{}\t{}".format(i, self.nm[host]["tcp"][i]["state"], self.nm[host]["tcp"][i]["name"]))
+                    print(" | Product : {}".format(self.nm[host]["tcp"][i]["product"]))
+                    if self.nm[host]["tcp"][i]["script"]:
+                        print(" | Script :")
+                        for script in self.nm[host]["tcp"][i]["script"]:
+                            print(" | | {} : {}".format(script, self.nm[host]["tcp"][i]["script"][script]))
+                    print(" |_Version : {}".format(self.nm[host]["tcp"][i]["version"]))
+            except:
+                pass
+        print("\nAnalyse Nmap finie pour {}.".format(host))
 
     def Auto_Diag(self):
         # ... (your existing code)
