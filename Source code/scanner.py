@@ -1,12 +1,13 @@
-import json, paramiko,time,
+import json, paramiko,time
 from threading import Thread
 from ftplib import FTP
+from network import Network
 
 class Scanner(Network):
     def __init__(self):
         super().__init__()
 
-     def nmap_scan(self, host):
+    def nmap_scan(self, host):
         print(f"\nNmap scan in progress for: {host}")
         scan_result = self.nm.scan(hosts=host, arguments='-sV -p 20-450 --script="vuln and safe"')
 
