@@ -6,6 +6,13 @@ class Scanner(Network):
     def __init__(self):
         super().__init__()
 
+     def nmap_scan(self, host):
+        print(f"\nNmap scan in progress for: {host}")
+        scan_result = self.nm.scan(hosts=host, arguments='-sV -p 20-450 --script="vuln and safe"')
+
+        with open(f"scan/{host}.json", "w", encoding="utf-8") as f:
+            f.write(json.dumps(scan_result, indent=4, sort_keys=True))
+    
     def cve_finder(self):
         try:
             cve_entry = str(input("\nSaisissez un code CVE pour votre recherche:\n>"))
@@ -56,10 +63,27 @@ class Scanner(Network):
             self.bruteforce(host, "ftp")
 
     def Auto_Diag(self):
-        for i in range(len(self.hosts)):
-            self.nmap_scan(self.hosts[i])
-            self.print_result(self.hosts[i])
-            self.service_detection(self.hosts[i])
-            self.save_results_to_word(self.hosts[i]) 
-            time.sleep(1)
-            #self.cve_finder()
+        try:
+            self.network_scanner()
+
+            for i in range(len(self.hosts)):
+                host = self.hosts[i]
+
+                self.section_print(f"Auto-Diag for {host}")
+                
+                try:
+                    self.nmap_scan(host)
+                    self.print_result(host)
+                    self.service_detection(host)
+                    # self.save_results_to_word(host)  # Assuming you have the save_results_to_word method
+
+                except nmap.PortScannerError as e:
+                    print(f"Error during Nmap scan for {host}: {e}")
+
+                except Exception as e:
+                    print(f"Error during Auto-Diag for {host}: {e}")
+
+                time.sleep(1)
+
+        except KeyboardInterrupt:
+            print("\n[x] Program closed!")
