@@ -47,7 +47,14 @@ class Network:
                 pass
         print("\nAnalyse Nmap finie pour {}.".format(host))
 
-    def Auto_Diag(self):
-        # ... (your existing code)
+     def Auto_Diag(self):
+            try:
+                self.network_scanner()
+    
+                # Create an instance of the Scanner class
+                scanner = Scanner()
+                scanner.Auto_Diag()
+    
+            except KeyboardInterrupt:
+                print("\n[x] Program closed!")
 
-# You can keep other classes and functions in this file if needed
