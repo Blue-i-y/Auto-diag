@@ -2,6 +2,7 @@ import sys
 
 from network import Network
 from scanner import Scanner
+from GUI import GUI
 
 if __name__ == "__main__":
     try:
