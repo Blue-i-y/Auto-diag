@@ -1,5 +1,4 @@
-import json, requests
-import filterJSON
+import json, requests, cpe_creator
 
 url = f'https://services.nvd.nist.gov/rest/json/cves/2.0'
 api_key = {'apiKey': '97410594-f2e3-4e00-a63e-1e6eb5dcef38'}
