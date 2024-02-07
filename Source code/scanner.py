@@ -9,11 +9,55 @@ class Scanner(Network):
 
     def nmap_scan(self, host):
         print(f"\nNmap scan in progress for: {host}")
-        scan_result = self.nm.scan(hosts=host, arguments='-sV -F --script="vuln and safe"')
+        scan_result = self.nm.scan(hosts=host, arguments='-sV -F --script vuln')
 
-        with open(f"scan/{host}.json", "w", encoding="utf-8") as f:
-            f.write(json.dumps(scan_result, indent=4, sort_keys=True))
+       # with open(f"scan/{host}.json", "w", encoding="utf-8") as f:
+        #    f.write(json.dumps(scan_result, indent=4, sort_keys=True))
 
+        
+    def print_result(self, host):
+        print("Hostname : {}".format(self.nm[host].hostname()))
+        print("PORT\tSTATE\tSERVICE")
+        for i in range(20, 450):
+            try:
+                if self.nm[host]["tcp"][i]:
+                    print("{}/tcp\t{}\t{}".format(i, self.nm[host]["tcp"][i]["state"], self.nm[host]["tcp"][i]["name"]))
+                    print(" | Product : {}".format(self.nm[host]["tcp"][i]["product"]))
+                    if self.nm[host]["tcp"][i]["script"]:
+                        print(" | Script :")
+                        for script in self.nm[host]["tcp"][i]["script"]:
+                            print(" | | {} : {}".format(script, self.nm[host]["tcp"][i]["script"][script]))
+                    print(" |_Version : {}".format(self.nm[host]["tcp"][i]["version"]))
+            except:
+                pass
+        print(f"\nAnalyse Nmap finie pour {host}")
+
+    def Auto_Diag(self):
+        try:
+            self.discover_hosts()
+
+            for i in range(len(self.hosts)):
+                host = self.hosts[i]
+
+                self.section_print(f"Auto-Diag for {host}")
+                
+                try:
+                    self.nmap_scan(host)
+                    self.print_result(host)
+                    #self.service_detection(host)
+                    # self.save_results_to_word(host)  
+
+                except nmap.PortScannerError as e:
+                    print(f"Error during Nmap scan for {host}: {e}")
+
+                except Exception as e:
+                    print(f"Error during Auto-Diag for {host}: {e}")
+
+                time.sleep(1)
+
+        except KeyboardInterrupt:
+            print("\n[x] Program closed!")
+"""
     def cve_finder(self):
         try:
             cve_entry = str(input("\nSaisissez un code CVE pour votre recherche:\n>"))
@@ -62,29 +106,4 @@ class Scanner(Network):
         elif self.nm[host].has_tcp(21):
             print("\nHôte\t{}\nPort ftp (21) ouvert.\nLancement d'un bruteforce sur cet hôte.".format(host))
             self.bruteforce(host, "ftp")
-
-    def Auto_Diag(self):
-        try:
-            self.discover_hosts()
-
-            for i in range(len(self.hosts)):
-                host = self.hosts[i]
-
-                self.section_print(f"Auto-Diag for {host}")
-                
-                try:
-                    self.nmap_scan(host)
-                    self.print_result(host)
-                    self.service_detection(host)
-                    # self.save_results_to_word(host)  
-
-                except nmap.PortScannerError as e:
-                    print(f"Error during Nmap scan for {host}: {e}")
-
-                except Exception as e:
-                    print(f"Error during Auto-Diag for {host}: {e}")
-
-                time.sleep(1)
-
-        except KeyboardInterrupt:
-            print("\n[x] Program closed!")
+"""
