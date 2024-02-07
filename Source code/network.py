@@ -1,4 +1,5 @@
 import nmap, socket, pyfiglet
+from netdiscover import *
 
 class Network:
     def __init__(self):
@@ -12,24 +13,7 @@ class Network:
         print("\n" + "=" * 50)
         print(title)
         print("=" * 50 + "\n")
-
-    def network_scanner(self):
-        if len(self.ip) == 0:
-            network = f"{socket.gethostbyname(socket.gethostname())}/24"
-        else:
-            network = self.ip + '/24'
-        
-        print("\nScan réseau en cours ...")
-        self.nm.scan(hosts = network, arguments = "-Pn")
-        hosts_list = [(x, self.nm[x]['status']['state']) for x in self.nm.all_hosts()]
-
-        print("=" * 50)
-        for host, status in hosts_list:
-            print("Hôte\t{}\t{}".format(host, status))
-            self.hosts.append(host)
-        print("=" * 50)
-        # print(hosts_list)
-
+    
     def print_result(self, host):
         print("Hostname : {}".format(self.nm[host].hostname()))
         print("PORT\tSTATE\tSERVICE")
@@ -46,6 +30,50 @@ class Network:
             except:
                 pass
         print("\nAnalyse Nmap finie pour {}.".format(host))
+
+    def discover_hosts(self):
+        mask = input(f"Enter your mask : ")
+
+        if len(self.ip) == 0:
+            network = f"{socket.gethostbyname(socket.gethostname())}/{mask}"
+        else:
+            network = self.ip + f'/{mask}'
+
+        print(f"\nyour IP address is {network}")
+        print("host enumeration en cours ...")
+
+        disc = Discover()
+        hosts = disc.scan(ip_range=network)
+        if (not disc):
+            print("there is no alive hosts")
+
+        print("Alive hosts_list :")
+        for i in hosts:
+            ip = i["ip"]
+            mac = i["mac"]
+            print(f"\n{ip} --> {mac}")
+        return hosts
+
+    """def network_scanner(self):
+        mask = input(f"Enter your mask : ")
+        if len(self.ip) == 0:
+            network = f"{socket.gethostbyname(socket.gethostname())}/{mask}"
+        else:
+            network = self.ip + f'/{mask}'
+        print(f"\nyour IP address is {network}")
+        print("\nScan réseau en cours ...")
+        self.nm.scan(hosts = network, arguments = "-Pn -F")
+        print("\n nm scan finished")
+        hosts_list = [(x, self.nm[x]['status']['state']) for x in self.nm.all_hosts()]
+
+        print("=" * 50)
+        for host, status in hosts_list:
+            print("Hôte\t{}\t{}".format(host, status))
+            self.hosts.append(host)
+        print("=" * 50)
+        print(hosts_list)"""
+
+
 
     def Auto_Diag(self):
         try:
