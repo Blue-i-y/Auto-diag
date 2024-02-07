@@ -47,7 +47,8 @@ class Network:
             mac = i["mac"]
             if ip != self.ip:
                 print(f"\n{ip} --> {mac} : Host is UP")
-                self.hosts.append(ip)
+                if ip == "10.0.2.15":
+                    self.hosts.append(ip)
 
     """def network_scanner(self):
         mask = input(f"Enter your mask : ")
