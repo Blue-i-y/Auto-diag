@@ -9,11 +9,11 @@ class Scanner(Network):
 
     def nmap_scan(self, host):
         print(f"\nNmap scan in progress for: {host}")
-        scan_result = self.nm.scan(hosts=host, arguments='-sV -p 20-450 --script="vuln and safe"')
+        scan_result = self.nm.scan(hosts=host, arguments='-sV -F --script="vuln and safe"')
 
         with open(f"scan/{host}.json", "w", encoding="utf-8") as f:
             f.write(json.dumps(scan_result, indent=4, sort_keys=True))
-    
+
     def cve_finder(self):
         try:
             cve_entry = str(input("\nSaisissez un code CVE pour votre recherche:\n>"))
@@ -65,7 +65,7 @@ class Scanner(Network):
 
     def Auto_Diag(self):
         try:
-            self.network_scanner()
+            self.discover_hosts()
 
             for i in range(len(self.hosts)):
                 host = self.hosts[i]
@@ -76,7 +76,7 @@ class Scanner(Network):
                     self.nmap_scan(host)
                     self.print_result(host)
                     self.service_detection(host)
-                    # self.save_results_to_word(host)  # Assuming you have the save_results_to_word method
+                    # self.save_results_to_word(host)  
 
                 except nmap.PortScannerError as e:
                     print(f"Error during Nmap scan for {host}: {e}")
