@@ -9,7 +9,7 @@ Bienvenue dans **Auto-Diag**, un outil de diagnostic automatique de réseau. Cet
 Assurez-vous d'avoir les bibliothèques Python suivantes installées :
 
 ```bash
-pip install nmap pyfiglet paramiko pycvesearch docx
+pip install nmap pyfiglet paramiko pycvesearch docx python-netdiscover
 ```
 
 ---
