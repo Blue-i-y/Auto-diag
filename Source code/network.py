@@ -50,27 +50,6 @@ class Network:
                 if ip == "10.0.2.15":
                     self.hosts.append(ip)
 
-    """def network_scanner(self):
-        mask = input(f"Enter your mask : ")
-        if len(self.ip) == 0:
-            network = f"{socket.gethostbyname(socket.gethostname())}/{mask}"
-        else:
-            network = self.ip + f'/{mask}'
-        print(f"\nyour IP address is {network}")
-        print("\nScan réseau en cours ...")
-        self.nm.scan(hosts = network, arguments = "-Pn -F")
-        print("\n nm scan finished")
-        hosts_list = [(x, self.nm[x]['status']['state']) for x in self.nm.all_hosts()]
-
-        print("=" * 50)
-        for host, status in hosts_list:
-            print("Hôte\t{}\t{}".format(host, status))
-            self.hosts.append(host)
-        print("=" * 50)
-        print(hosts_list)"""
-
-
-
     def Auto_Diag(self):
         try:
             self.discover_hosts()
