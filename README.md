@@ -12,6 +12,10 @@ Assurez-vous d'avoir les bibliothèques Python suivantes installées :
 pip install nmap pyfiglet paramiko pycvesearch docx python-netdiscover
 ```
 
+```bash
+pip install --user python-netdiscover pymetasploit3
+```
+
 ---
 
 ## Utilisation
