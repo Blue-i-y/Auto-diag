@@ -21,3 +21,6 @@ def check_subnet_mask(mask):
 
 def print_red(text):
     print("\033[91m{}\033[00m".format(text))
+
+def print_orange(text):
+    print("\033[33m{}\033[00m".format(text))
