@@ -1,5 +1,6 @@
 import nmap, socket, pyfiglet
 from netdiscover import *
+sys.path.append('./Utiles')
 from utiles import *
 
 class Network:
