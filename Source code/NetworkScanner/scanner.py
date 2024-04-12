@@ -35,10 +35,10 @@ class Scanner(Network):
 
     def service_detection(self, host):
         if self.nm[host].has_tcp(22):
-            print(f"\n Hôte \t {host} \n Port ssh (22) ouvert. \n Lancement d'un bruteforce sur cet hôte.")
+            print(f"\n Hôte \t {host} \n Port ssh (22) ouvert. \n Tentative de bruteforce sur cet hôte.")
             self.bruteforce(host, "ssh")
         elif self.nm[host].has_tcp(21):
-            print(f"\n Hôte \t {host} \n Port ftp (21) ouvert. \n Lancement d'un bruteforce sur cet hôte.")
+            print(f"\n Hôte \t {host} \n Port ftp (21) ouvert. \n Tentative de bruteforce sur cet hôte.")
             self.bruteforce(host, "ftp")
 
     def ssh_connect(self, ip, username, password, port=22):
@@ -60,8 +60,8 @@ class Scanner(Network):
             return False
             
     def bruteforce(self, ip, type):
-        username = str(input("Entrer un nom d'utilisateur : \n >"))
-        wordl = str(input("Entrer un dictionnaire de mots de passe (juste le nom du fichier, sans l'extension) : \n >"))
+        username = str(input("Veuillez entrer un nom d'utilisateur : \n >"))
+        wordl = str(input("Veuillez entrer un dictionnaire de mots de passe (uniquement le nom du fichier sans l'extension) : \n >"))
 
         with open(f"/usr/share/dirb/wordlists/{wordl}.txt", 'r', encoding = "utf8") as file:
             for line in file.readlines():
@@ -88,10 +88,10 @@ class Scanner(Network):
                     # self.save_results_to_word(host)  
 
                 except nmap.PortScannerError as e:
-                    print(f"Error during Nmap scan for {host}: {e}")
+                    print(f"Erreur pendant le scan Nmap pour {host}: {e}")
 
                 except Exception as e:
-                    print(f"Error during nmap scan for {host}: {e}")
+                    print(f"Erreur pendant le scan Nmap pour {host}: {e}")
 
                 time.sleep(1)
 
