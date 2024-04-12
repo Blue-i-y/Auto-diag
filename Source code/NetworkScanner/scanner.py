@@ -8,7 +8,7 @@ class Scanner(Network):
         super().__init__()
 
     def nmap_scan(self, host):
-        print(f"\nNmap scan in progress for: {host}")
+        print(f"\Progression du scan Nmap pour : {host}")
         scan_result = self.nm.scan(hosts=host, arguments='-sV -T4 -sC -O')
 
         filename = f"{host.replace('.', '_')}.json"
