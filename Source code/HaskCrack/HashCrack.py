@@ -13,19 +13,19 @@ def crack_hash(wordlist_location, hash_input, algorithm):
     return False
 
 def main():
-    hash_input = input('Enter hash to be cracked: ')
-    algorithm = input('Enter hash algorithm  (press Enter for default - md5): ')
+    hash_input = input('Saisir le hash à décrypter : ')
+    algorithm = input('Entrer l'algorithme de hachage (Appuyer sur ENTRER par défaut - md5): ')
 
     if not algorithm:
         algorithm = 'md5'  # Utiliser md5 par défaut si aucun algorithme n'est spécifié
 
-    wordlist_location = input('Enter wordlist file location (press Enter for default - rockyou.txt): ')
+    wordlist_location = input('Veuillez entrer le chemin de la wordlist (Appuyer sur ENTRER par défaut - rockyou.txt): ')
 
     if not wordlist_location:
         wordlist_location = '/usr/share/wordlists/rockyou.txt'
 
     if not os.path.isfile(wordlist_location):
-        print('Wordlist file not found.')
+        print('Fichier wordlist non trouvé.')
         return
 
     algorithms = hashlib.algorithms_available
@@ -33,7 +33,7 @@ def main():
     #found = crack_hash(wordlist_location, hash_input, algorithm)
 
     if not found:
-        print('Password not found in the wordlist.')
+        print('Mots de passe non trouvé dans la wordlist.')
 
 if __name__ == "__main__":
     main()
