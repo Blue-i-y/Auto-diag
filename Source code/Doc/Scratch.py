@@ -114,7 +114,7 @@ Create_footer_header()
 title = document.add_heading('Pentest automatic report', level=0)
 title.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 title.paragraph_format.space_before = Pt(250)
-document.add_paragraph('Project realised by Guillaume, Yassir and Victor')
+document.add_paragraph('Projet réalisé par Guillaume, Yassir and Victor')
 
 document.add_page_break()
 
