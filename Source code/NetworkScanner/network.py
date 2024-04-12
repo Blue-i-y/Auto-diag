@@ -11,7 +11,7 @@ class Network:
             if check_ip_address(self.ip):
                 break
             else:
-                print_red(f"L'adresse IP {self.ip} n'est pas au bon format IPv4.")
+                print_red(f"L'adresse IP {self.ip} n'est pas au bon format, veuillez mettre l'adresse IP au format IPv4.")
         
         self.hosts = []
         self.nm = nmap.PortScanner()
