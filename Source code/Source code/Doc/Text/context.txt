@@ -1,5 +1,0 @@
-À l'ère numérique actuelle, où les menaces en ligne sont omniprésentes, la sécurité des systèmes informatiques est une préoccupation majeure pour les entreprises et les organisations. Les cyberattaques peuvent avoir des conséquences dévastatrices, allant de la perte de données confidentielles à la perturbation des opérations commerciales.
-
-Pour protéger efficacement leurs infrastructures, de nombreuses entreprises font appel à des tests de pénétration, également connus sous le nom de pentests. Ces tests simulent des attaques informatiques pour identifier les vulnérabilités des systèmes, permettant ainsi aux équipes de sécurité de renforcer leurs défenses et de réduire les risques de compromission.
-
-Dans ce contexte, notre équipe s'est attaquée au défi de développer un outil de pentest automatisé. L'objectif est de fournir aux professionnels de la sécurité un moyen simple et efficace de détecter les faiblesses de leurs systèmes, tout en réduisant le temps et les efforts nécessaires pour mener ces évaluations.
