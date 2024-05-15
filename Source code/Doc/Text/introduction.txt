@@ -1,5 +1,0 @@
-Bienvenue dans le monde de la cybersécurité automatisée ! Notre projet est né de la volonté de rendre les tests de pénétration plus accessibles, plus rapides et plus humains. Face à la montée des cybermenaces, nous avons créé un outil qui permet aux équipes de sécurité de se concentrer sur l'essentiel : protéger leurs données et leurs infrastructures.
-
-Notre programme de pentest automatisé est conçu pour être votre partenaire dans la lutte contre les attaques en ligne. Avec des fonctionnalités telles que SSHBrute force, FTPBruteforce, hashcrack, Netdiscover, Nmap, Sub ennumeration et directory ennumeration, il offre une panoplie d'outils puissants à portée de main.
-
-Dans cette aventure, nous vous invitons à découvrir comment notre programme peut vous aider à renforcer la sécurité de vos systèmes de manière simple, rapide et efficace. Accrochez-vous, car la sécurité informatique n'a jamais été aussi passionnante !
