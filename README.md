@@ -27,8 +27,9 @@ pip install --user python-netdiscover pymetasploit3
    ```
 
 2. **Exécution**
+depuis le dossier ou se trouve auto_diag.py lance cette commande : 
    ```bash
-   python auto_diag.py
+   sudo python auto_diag.py
    ```
 
 ---
