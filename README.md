@@ -93,4 +93,3 @@ L'utilisation de cet outil est destinée uniquement à des fins éducatives et d
 
 --- 
 
-*Auto-Diag* est développé par [Yassir / victor / guigui].
